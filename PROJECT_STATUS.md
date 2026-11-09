@@ -51,3 +51,9 @@ Added installation details from the existing public site: replacement radiator v
 ## Visual refinement — 9 November 2026
 
 Replaced the emoji cog and remaining benefit glyphs with a consistent set of minimalist outline SVG icons. Added subtle colour and icon movement on card hover plus a small CTA arrow shift; reduced-motion preferences suppress movement. Removed full stops from headings and display titles.
+
+## Email enquiry delivery — 9 November 2026
+
+Recipient confirmed as info@copangel.com. Replaced mailto draft creation with native HTTPS POST to FormSubmit. Separate subject lines identify homeowner launch interest, investor prospectus requests, installer, partner and general enquiries. Optional product-update consent is included explicitly. Default FormSubmit spam checks and confirmation page are retained; honeypot and input length limits added. No CRM, lead database or automatic marketing campaign has been built. FormSubmit retains submissions for 30 days, disclosed on the form.
+
+Pending: activate the form using the one-time confirmation delivered to the inbox after the first submission from the hosted page, then verify actual receipt for both primary audience types. No activation or end-to-end delivery is claimed. Review the existing COP Angel privacy notice for this processor before public launch.

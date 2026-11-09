@@ -13,6 +13,16 @@
  document.getElementById('closeModal').addEventListener('click',closeModal);
  modal.addEventListener('mousedown',e=>{if(e.target===modal)closeModal()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(modal.classList.contains('open'))closeModal();else closeMenu()};if(e.key==='Tab'&&modal.classList.contains('open')){const nodes=[...modal.querySelectorAll('button,input,select,textarea,a[href]')].filter(x=>!x.disabled);const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
- form.addEventListener('submit',e=>{e.preventDefault();const data=new FormData(form);const subject=role.value==='investor'?'Investor prospectus interest':role.value==='homeowner'?'Homeowner product interest':'COP Angel enquiry';const body=['COP Angel enquiry','',...['name','email','role','location','details'].map(k=>k.toUpperCase()+': '+(data.get(k)||'')),'','Product and launch email updates: '+(data.has('updates')?'Yes, please':'Not requested'),'',role.value==='investor'?'Please contact me about the investor prospectus when available.':'Please contact me about my enquiry.'].join('\n');window.location.href='mailto:info@copangel.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);status.textContent='Your email draft has been requested. Send it in your email app to complete your enquiry. If no draft opens, email info@copangel.com directly.';status.focus()});
+ const submitButton=form.querySelector('button[type="submit"]');
+ const subjects={homeowner:'[COP Angel] Homeowner launch interest',investor:'[COP Angel] Investor prospectus request',installer:'[COP Angel] Installer enquiry',partner:'[COP Angel] Partnership enquiry',general:'[COP Angel] Website enquiry'};
+ form.addEventListener('submit',e=>{
+  if(submitButton.disabled){e.preventDefault();return}
+  document.getElementById('enquirySubject').value=subjects[role.value]||subjects.general;
+  document.getElementById('updatesConsent').value=document.getElementById('permission').checked?'Yes — product development and launch updates':'Not requested';
+  status.textContent='Sending your enquiry securely. Complete any spam check on the next page to finish.';
+  submitButton.disabled=true;submitButton.textContent='Sending…';
+ });
+ window.addEventListener('pageshow',()=>{submitButton.disabled=false;submitButton.textContent='Send enquiry →';status.textContent=''});
+
  if('IntersectionObserver' in window){const items=[...links.querySelectorAll('a')];const observer=new IntersectionObserver(entries=>{const current=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(current)items.forEach(a=>{if(a.hash==='#'+current.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})},{rootMargin:'-15% 0px -45% 0px',threshold:[0,.1,.4]});items.forEach(a=>{const target=document.querySelector(a.hash);if(target)observer.observe(target)})}
 })();
