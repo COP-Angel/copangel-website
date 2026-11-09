@@ -43,3 +43,7 @@ Updated: 9 November 2026
 ## Continuity
 
 Keep this file updated with decisions, completed work and outstanding tasks so a future chat can resume from the repository.
+
+## Homepage review — 9 November 2026
+
+Added installation details from the existing public site: replacement radiator valves and underfloor actuators, wireless connection to the heat pump control box. Added a concise team experience message in the investor section. Kept savings claims qualitative pending evidence for specific percentages. Current enquiry mechanism remains email preparation; a hosted form service is still needed for automatic capture before launch.
