@@ -24,5 +24,38 @@
  });
  window.addEventListener('pageshow',()=>{submitButton.disabled=false;submitButton.textContent='Send enquiry →';status.textContent=''});
 
- if('IntersectionObserver' in window){const items=[...links.querySelectorAll('a')];const observer=new IntersectionObserver(entries=>{const current=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(current)items.forEach(a=>{if(a.hash==='#'+current.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})},{rootMargin:'-15% 0px -45% 0px',threshold:[0,.1,.4]});items.forEach(a=>{const target=document.querySelector(a.hash);if(target)observer.observe(target)})}
+
+ // Read every section position rather than only the latest observer entries.
+ const navItems=[...links.querySelectorAll('a[href^="#"]')];
+ const sections=[...navItems.map(a=>document.getElementById(a.hash.slice(1))),document.getElementById('contact')].filter(Boolean);
+ let navigationTarget=null,releaseTimer=null,scrollFrame=null;
+ function markCurrent(id){
+  navItems.forEach(a=>{if(a.hash==='#'+id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+ }
+ function visibleSection(){
+  const activationLine=document.querySelector('.nav').getBoundingClientRect().bottom+48;
+  let current=null;
+  sections.forEach(section=>{if(section.getBoundingClientRect().top<=activationLine)current=section.id});
+  return current;
+ }
+ function updateNavigation(){
+  scrollFrame=null;
+  markCurrent(navigationTarget||visibleSection());
+ }
+ function queueNavigation(){if(scrollFrame===null)scrollFrame=requestAnimationFrame(updateNavigation)}
+ function releaseNavigation(){clearTimeout(releaseTimer);navigationTarget=null;queueNavigation()}
+ function selectDestination(hash){
+  const target=document.getElementById(hash.slice(1));
+  if(!target)return;
+  navigationTarget=target.id;markCurrent(navigationTarget);
+  clearTimeout(releaseTimer);
+  releaseTimer=setTimeout(releaseNavigation,1600);
+ }
+ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>selectDestination(a.hash)));
+ window.addEventListener('hashchange',()=>selectDestination(window.location.hash));
+ window.addEventListener('scroll',queueNavigation,{passive:true});
+ window.addEventListener('scrollend',releaseNavigation);
+ window.addEventListener('resize',queueNavigation);
+ window.addEventListener('load',queueNavigation);
+ queueNavigation();
 })();
