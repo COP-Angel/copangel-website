@@ -61,3 +61,11 @@ Pending: activate the form using the one-time confirmation delivered to the inbo
 ## Actual cockpit image — 9 November 2026
 
 Replaced the illustrative hero dashboard with Richard's supplied Cockpit.JPG, published as copangel-cockpit.jpg. The screenshot is shown in full without cropping and links to the original-size image. Removed concept-only captions and overlay from that panel; identified it as a development software screenshot. Preserved current form handling and the corrected navigation script.
+
+## Audience and AI messaging update — 10 November 2026
+
+Added homeowner, investor and installer registration buttons in the hero, all opening the enquiry form directly with the relevant role selected. Replaced mixed footer actions with three consistent end-user, installer and investor enquiry buttons. Browser tested all six routes without sending submissions.
+
+Reworked benefit cards into a two-by-two layout, stacking on narrow screens. Retained minimalist icons and subtle hover changes. Richard plans to supply benefit images; use static imagery with visible captions when supplied, rather than requiring hover or an automatic carousel to understand the content.
+
+Homeowner copy now explains the individual home and occupancy context, an AI-led approach and the planned subscription model, aiming for efficiency savings above the subscription cost. Savings remain property-dependent; no guaranteed financial return is claimed. Investor copy now highlights the AI-enabled next-generation software platform and planned subscription revenue.
