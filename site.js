@@ -2,7 +2,7 @@
 (()=>{
  const links=document.getElementById('navLinks'),hamb=document.querySelector('.hamb'),modal=document.getElementById('modal'),role=document.getElementById('role'),title=document.getElementById('modalTitle'),desc=document.getElementById('modalDescription'),form=document.getElementById('interestForm'),status=document.getElementById('emailStatus');
  let lastFocus=null;
- const labels={homeowner:['Register homeowner interest',"Tell us you're interested in COP Angel for your home. You can also opt in to product and launch updates."],investor:['Register prospectus interest','Ask to receive the investor prospectus when available, as COP Angel moves towards manufacturing.'],installer:['Register installer interest','Tell us about your installation business and interest in COP Angel.'],partner:['Explore a partnership','Tell us about your organisation and how we could work together.'],general:['Contact COP Angel','Send your enquiry to the team.']};
+ const labels={homeowner:['Register homeowner interest',"Tell us you're interested in COP Angel for your home. You can also opt in to product and launch updates."],investor:['Register prospectus interest','Receive the Investor Prospectus as we move towards manufacturing.'],installer:['Register installer interest','Tell us about your installation business and interest in COP Angel.'],partner:['Explore a partnership','Tell us about your organisation and how we could work together.'],general:['Contact COP Angel','Send your enquiry to the team.']};
  function closeMenu(){links.classList.remove('open');hamb.setAttribute('aria-expanded','false')}
  hamb.addEventListener('click',()=>{const open=links.classList.toggle('open');hamb.setAttribute('aria-expanded',String(open))});
  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
@@ -18,6 +18,7 @@
  form.addEventListener('submit',e=>{
   if(submitButton.disabled){e.preventDefault();return}
   document.getElementById('enquirySubject').value=subjects[role.value]||subjects.general;
+  document.getElementById('enquiryNext').value=new URL('thank-you.html',window.location.href).href;
   document.getElementById('updatesConsent').value=document.getElementById('permission').checked?'Yes — product development and launch updates':'Not requested';
   status.textContent='Sending your enquiry securely. Complete any spam check on the next page to finish.';
   submitButton.disabled=true;submitButton.textContent='Sending…';
