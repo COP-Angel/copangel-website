@@ -69,3 +69,11 @@ Added homeowner, investor and installer registration buttons in the hero, all op
 Reworked benefit cards into a two-by-two layout, stacking on narrow screens. Retained minimalist icons and subtle hover changes. Richard plans to supply benefit images; use static imagery with visible captions when supplied, rather than requiring hover or an automatic carousel to understand the content.
 
 Homeowner copy now explains the individual home and occupancy context, an AI-led approach and the planned subscription model, aiming for efficiency savings above the subscription cost. Savings remain property-dependent; no guaranteed financial return is claimed. Investor copy now highlights the AI-enabled next-generation software platform and planned subscription revenue.
+
+## Google Analytics integration — 10 November 2026
+
+Installed GA4 measurement ID G-NZC02FQY3G directly, without the separately shown GTM container. analytics.js is included on the homepage, thank-you and privacy pages. Basic consent flow prevents Google tag loading until the visitor accepts analytics; rejection leaves enquiries available. Browser-local preference expires after 180 days and can be changed through Cookie settings. Withdrawal disables tracking, clears accessible GA cookies and reloads.
+
+Custom events: section_view (section_name), enquiry_open (audience), enquiry_submit_attempt (audience), enquiry_confirmation_view. Confirmation-page visits are not labelled verified lead delivery. Page URLs and referrer URLs are stripped of query strings and fragments before explicit page-view events. Custom events never include form names, emails or messages. Advertising storage, ad personalisation and Google signals are disabled in the integration.
+
+Verified consent blocking, acceptance, expiry, withdrawal, URL sanitisation and event categories in isolated tests. Browser confirmed no Google script before consent or after rejection, with the enquiry dialog still usable. Pending: owner checks incoming traffic in GA4 Realtime; configure custom dimensions/report views as needed. No team invitations have been issued. copangel.com DNS remains a separate launch step.
