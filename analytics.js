@@ -62,9 +62,10 @@
  const form=document.getElementById('interestForm');
  if(form)form.addEventListener('submit',()=>{
   const button=form.querySelector('button[type="submit"]');if(button&&button.disabled)return;
-  const role=document.getElementById('role').value;
-  if(['homeowner','investor','installer','partner','general'].includes(role))track('enquiry_submit_attempt',{audience:role});
+  const interests=[...form.querySelectorAll('[data-interest-choice]:checked')].map(input=>input.dataset.interestChoice);
+  if(interests.length)track('enquiry_submit_attempt',{audience:interests.join(',')});
  },{capture:true});
  window.addEventListener('storage',event=>{if(event.key===storageKey)location.reload()});
  const choice=readChoice();if(choice==='accepted')enable();else if(!choice)panel.hidden=false;
 })();
+
