@@ -181,6 +181,31 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObser
 })();
 </script>
 
+<style>
+/* Timeline motion and occasional Joule attention cue */
+@keyframes ca-timeline-travel{
+  0%{left:0;opacity:0}
+  2%{left:0;opacity:1}
+  16%{left:calc(100% - 12px);opacity:1}
+  19%,100%{left:calc(100% - 12px);opacity:0}
+}
+@keyframes ca-joule-attention{
+  0%,8%,22%,100%{box-shadow:0 6px 25px #102e3d29;filter:brightness(1)}
+  15%{box-shadow:0 6px 25px #102e3d29,0 0 0 9px #a4d56935;filter:brightness(1.08)}
+}
+@media(prefers-reduced-motion:no-preference){
+  .milestone::after{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border:3px solid #fbfcf8;border-radius:50%;background:#8ecf54;box-shadow:0 0 8px #8ecf5466;pointer-events:none;opacity:0;animation:ca-timeline-travel 6s linear infinite}
+  .milestone:nth-child(2)::after{animation-delay:1s}
+  .milestone:nth-child(3)::after{animation-delay:2s}
+  .milestone:nth-child(4)::after{animation-delay:3s}
+  #ca-chat-launch{animation:ca-joule-attention 12s ease-in-out 4s infinite}
+  #ca-chat-launch:hover,#ca-chat-launch:focus-visible{animation:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .milestone::after{content:none;animation:none}
+  #ca-chat-launch{animation:none}
+}
+</style>
 </body></html>
 
 
